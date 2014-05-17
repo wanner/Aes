@@ -80,7 +80,6 @@ void createExpandKey(){
 		for(int i = 0; i<4;i++){
 			tmp[i] = expandedKey[(currentSizeOfExpandedArray-4)+i];
 			//cout<<tmp[i];
-
 		}
 
 
@@ -97,10 +96,7 @@ void createExpandKey(){
 
 				for ( int i= 0; i<4;i++){
 					int tmp1 = int(tmp[i]);
-					//cout<<"Nach  ROTation vor SBox: "<<int(tmp[i])<<endl;
 					tmp[i] = SBox[tmp1];
-					//cout<<"Nach ROTation nach SBox: "<<int(tmp[i])<<endl;
-
 
 				}
 
@@ -108,8 +104,12 @@ void createExpandKey(){
 			//cout<<"Key: "<<int(key[i])<<" tmp: "<<int(tmp[i])<<" Rcon1:"<<int(Rcon[1])<<" expandedKey: "<<expandedKey[i];
 			int x = key[i];
 			int y = tmp[i];
+			int z = x xor y;
 
-			expandedKey[i] = key[i] xor tmp[i] xor Rcon[1];
+			if ( i==0) z xor Rcon[1];
+
+
+			expandedKey[currentSizeOfExpandedArray] = z;
 			cout<< int(expandedKey[i])<<" "<<endl;
 			currentSizeOfExpandedArray++;
 		}
@@ -124,11 +124,16 @@ void createExpandKey(){
 int main() {
 
 createExpandKey();
-//cout<<(expandedKey);
+for (int i = 0;i <176; i++){
+	cout<<"i: "<<i<<" "<< int(expandedKey[i])<<endl;
+}
+cout<<(expandedKey);
 int x= 48;
 int y= 27;
-int z = 48 xor 27;
-cout <<endl<< 48 xor 27;
+int z = x xor y;
+int a= 1;
+z = z xor a;
+//cout <<endl<< z ;
 
 
 	return 0;
