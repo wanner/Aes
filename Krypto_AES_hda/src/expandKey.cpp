@@ -29,7 +29,7 @@ void expandKey::rotateWord(char* tmp){
 	    tmp[3] = dummy;
 }
 
-char expandKey::getRconValue(char val){
+uint8_t expandKey::getRconValue(uint8_t val){
 	 return Rcon[val];
 }
 
