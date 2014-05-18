@@ -6,6 +6,7 @@
 // Description : Hello World in C++, Ansi-style
 //============================================================================
 
+#include "expandKey.h"
 #include <iostream>
 using namespace std;
 
@@ -40,7 +41,7 @@ static const uint8_t SBox[256] = {
     0x8c, 0xa1, 0x89, 0x0d, 0xbf, 0xe6, 0x42, 0x68, 0x41, 0x99, 0x2d, 0x0f, 0xb0, 0x54, 0xbb, 0x16  // F
 };
 
-static const char Rcon[255] = { 0x8d, 1, 0x02, 0x04, 0x08, 0x10, 0x20,
+static const char Rcon[255] = { 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20,
 		0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8, 0xab, 0x4d, 0x9a, 0x2f, 0x5e, 0xbc,
 		0x63, 0xc6, 0x97, 0x35, 0x6a, 0xd4, 0xb3, 0x7d, 0xfa, 0xef, 0xc5, 0x91,
 		0x39, 0x72, 0xe4, 0xd3, 0xbd, 0x61, 0xc2, 0x9f, 0x25, 0x4a, 0x94, 0x33,
@@ -67,68 +68,9 @@ static const char Rcon[255] = { 0x8d, 1, 0x02, 0x04, 0x08, 0x10, 0x20,
 
 
 
-void createExpandKey(){
-	int currentSizeOfExpandedArray = 16;
-	char tmp[4];
-	for ( int i =0; i<SIZE; i++){
-		expandedKey[i] = key[i];
-	}
-
-	while(currentSizeOfExpandedArray<EXPANDEDSIZE){
-
-
-		for(int i = 0; i<4;i++){
-			tmp[i] = expandedKey[(currentSizeOfExpandedArray-4)+i];
-			//cout<<tmp[i];
-
-		}
-
-
-		if(currentSizeOfExpandedArray%16 ==0){
-	//		cout<<"___________________________"<<endl
-;
-			char tmp1 = tmp[0];
-				for (int i = 0; i < 3; i++) {
-					tmp[i] = tmp[i + 1];
-
-				}
-				tmp[3] = tmp1;
-
-
-				for ( int i= 0; i<4;i++){
-					int tmp1 = int(tmp[i]);
-					//cout<<"Nach  ROTation vor SBox: "<<int(tmp[i])<<endl;
-					tmp[i] = SBox[tmp1];
-					//cout<<"Nach ROTation nach SBox: "<<int(tmp[i])<<endl;
-
-
-				}
-
-		for(int i= 0;i<4;i++){
-			//cout<<"Key: "<<int(key[i])<<" tmp: "<<int(tmp[i])<<" Rcon1:"<<int(Rcon[1])<<" expandedKey: "<<expandedKey[i];
-			int x = key[i];
-			int y = tmp[i];
-
-			expandedKey[i] = key[i] xor tmp[i] xor Rcon[1];
-			cout<< int(expandedKey[i])<<" "<<endl;
-			currentSizeOfExpandedArray++;
-		}
-
-
-		}
-		currentSizeOfExpandedArray++;
-	}
-
-}
-
 int main() {
 
-createExpandKey();
-//cout<<(expandedKey);
-int x= 48;
-int y= 27;
-int z = 48 xor 27;
-cout <<endl<< 48 xor 27;
+
 
 
 	return 0;
