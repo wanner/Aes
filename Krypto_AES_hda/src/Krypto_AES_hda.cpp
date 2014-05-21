@@ -33,7 +33,7 @@ int main() {
 	expandKey x;
 	x.MakeExpandKey();
 
-	cout<<sizeof(x.expandedKey)<<endl;
+//	cout<<sizeof(x.expandedKey)<<endl;
 int j =0;
 	for( int i = 0; i<176; i++){
 		if ( j%16 ==0)cout<<endl;

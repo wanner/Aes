@@ -33,14 +33,14 @@ uint8_t expandKey::getRconValue(uint8_t val){
 	 return Rcon[val];
 }
 
-void expandKey::keyScheduleCore(char* tmp, int iteration){
+void expandKey::expScheduleTask(char* tmp, int value){
 	rotateWord(tmp);
 
 	    for (int i = 0; i < 4; ++i) {
 	        tmp[i] = getSboxValue(tmp[i]);
 	    }
 
-	    tmp[0] = tmp[0] ^ getRconValue(iteration); //NUR alle 4 mal beim ersten Byte!!!!!!!!!!!!! TEST XOR!!!!
+	    tmp[0] = tmp[0] ^ getRconValue(value); //NUR alle 4 mal beim ersten Byte!!!!!!!!!!!!! TEST XOR!!!!
 }
 
 void expandKey::MakeExpandKey(){
@@ -66,7 +66,7 @@ void expandKey::MakeExpandKey(){
 	        // Every 16,24,32 bytes we apply the core schedule to t
 	        // and increment rconIteration afterwards
 	        if(currentSize % SIZE == 0) {
-	            keyScheduleCore(tmp, rconIteration++);
+	            expScheduleTask(tmp, rconIteration++);
 	        }
 
 

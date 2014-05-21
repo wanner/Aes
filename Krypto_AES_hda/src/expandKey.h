@@ -74,7 +74,7 @@ public:
 	uint8_t getSboxValue(uint8_t val);
 	void rotateWord(char* tmp);
 	uint8_t getRconValue(uint8_t val);
-	void keyScheduleCore(char* tmp, int iteration);
+	void expScheduleTask(char* tmp, int value);
 void MakeExpandKey();
 };
 
