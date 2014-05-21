@@ -9,6 +9,7 @@
 #include "expandKey.h"
 #include <iostream>
 #include <iomanip>
+#include <string>
 using namespace std;
 
 
@@ -36,7 +37,9 @@ int main() {
 int j =0;
 	for( int i = 0; i<176; i++){
 		if ( j%16 ==0)cout<<endl;
-		cout<<(x.expandedKey[i])<<" ";
+string a = int_to_hex((x.expandedKey[i]));
+a= a.substr(8);
+		cout<<a<<" ";
 		j++;
 
 	}
