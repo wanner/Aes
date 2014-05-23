@@ -36,14 +36,25 @@ int main() {
 //	cout<<sizeof(x.expandedKey)<<endl;
 int j =0;
 	for( int i = 0; i<176; i++){
-		if ( j%16 ==0)cout<<endl;
-string a = int_to_hex((x.expandedKey[i]));
-a= a.substr(8);
-		cout<<a<<" ";
+		if ( j%16 ==0);
+cout<< (int(x.expandedKey[i]))<<" ";
+
 		j++;
 
 	}
-cout<<endl;
+
+	x.cipher(x.input,x.output);
+cout<<endl<<"Input: ";
+	for (int i = 0; i<16;i++){
+		cout<< x.input[i];
+	}
+	cout<<endl;
+
+cout<<endl<<"Cipher: ";
+	for (int i = 0; i<16;i++){
+			cout<<x.output[i];
+		}
+
 
 cout<<endl;cout<<endl;
 
