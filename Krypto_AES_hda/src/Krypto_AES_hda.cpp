@@ -12,51 +12,73 @@
 #include <string>
 using namespace std;
 
-
-
-
-
-template< typename T >
-std::string int_to_hex( T i )
-{
-  std::stringstream stream;
-  stream << "0x"
-         << std::setfill ('0') << std::setw(sizeof(T)*2)
-         << std::hex << i;
-  return stream.str();
+template<typename T>
+std::string int_to_hex(T i) {
+	std::stringstream stream;
+	stream << "0x" << std::setfill('0') << std::setw(sizeof(T) * 2) << std::hex
+			<< i;
+	return stream.str();
 }
-
-
 
 int main() {
 
 	expandKey x;
 	x.MakeExpandKey();
 
-//	cout<<sizeof(x.expandedKey)<<endl;
-int j =0;
-	for( int i = 0; i<176; i++){
-		if ( j%16 ==0);
-cout<< (int(x.expandedKey[i]))<<" ";
+//x.cipher(x.input,x.output);
+//x.decipher(x.output,x.input);
 
-		j++;
+//cout<<x.input<<" "<<endl;
+
+string eingabe;
+cout<<"Eingabe: ";
+//cin>>eingabe;
+std::getline (std::cin,eingabe);
+int paddingLength = 16 - (eingabe.length() %16);
+int counter = 0;
+int inputCounter = 0;
+int outputCounter = 0;
+string localDecipher;
+
+for (int i = 0; i<paddingLength;i++){
+	eingabe+="0";
+}
+
+int loopCounter = eingabe.length() / 16;
+
+cout <<eingabe<<" lcounter: "<<loopCounter<<endl;
+char test[16];
+
+
+for (int i = 0; i<loopCounter; i++){
+
+	for(int j =0; j<16;j++){
+		x.input[j] = eingabe[inputCounter];
+
+		inputCounter++;
 
 	}
+x.cipher(x.input,x.output);
+if(i==0)cout<<"Cipher: ";
+for(int j=0;j<16;j++){
+	cout<<int(x.output[j])<<" ";
+}
 
-	x.cipher(x.input,x.output);
-cout<<endl<<"Input: ";
-	for (int i = 0; i<16;i++){
-		cout<< x.input[i];
-	}
-	cout<<endl;
+if(loopCounter==i+1)cout<<endl;
 
-cout<<endl<<"Cipher: ";
-	for (int i = 0; i<16;i++){
-			cout<<x.output[i];
-		}
+x.decipher(x.output,x.input);
+
+for(int j=0;j<16;j++){
+
+	localDecipher+=x.input[j];
+}
+}
+
+cout<<endl<<endl;
+cout<<"DeCipher: "<<localDecipher;
 
 
-cout<<endl;cout<<endl;
+
 
 	return 0;
 }
